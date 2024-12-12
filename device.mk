@@ -128,6 +128,10 @@ $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 PRODUCT_PACKAGES += \
     LunarisDolby
 
+# Device-specific settings
+PRODUCT_PACKAGES += \
+    DSPVolumeSynchronizer \
+
 # DRM (Clearkey)
 PRODUCT_PACKAGES += \
     com.android.hardware.drm.clearkey

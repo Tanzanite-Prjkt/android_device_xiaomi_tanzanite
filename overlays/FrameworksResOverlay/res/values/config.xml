@@ -550,4 +550,14 @@
 
     <!-- Whether the device supports Smart Pixels -->
     <bool name="config_supportSmartPixels">true</bool>
+
+    <!-- The fixed keyboard vibration strength in [0,1], or -1 to indicate the strength not fixed
+         and should depend on the touch feedback intensity user setting -->
+    <item name="config_keyboardHapticFeedbackFixedAmplitude" type="dimen">0.62</item>
+
+    <!-- Indicating if keyboard vibration settings supported or not. -->
+    <bool name="config_keyboardVibrationSettingsSupported">true</bool>
+
+    <!-- Indicating if ringtone vibration settings supported or not. -->
+    <bool name="config_ringtoneVibrationSettingsSupported">true</bool>
 </resources>

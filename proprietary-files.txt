@@ -1432,12 +1432,9 @@ vendor/etc/vintf/manifest/android.hardware.security.sharedsecret-service.mitee.x
 system/lib64/android.hardware.security.keymint-V3-ndk.so:vendor/lib64/android.hardware.security.keymint-V3-ndk-v34.so;FIX_SONAME
 
 # Media (Common)
-vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b;DISABLE_CHECKELF
 vendor/bin/mt6789/v3avpud.mt6789:vendor/bin/v3avpud
 vendor/etc/VideoLog_dynamic.xml
-vendor/etc/init/android.hardware.media.c2@1.2-mediatek.rc
 vendor/etc/init/v3avpud.rc
-vendor/etc/vintf/manifest/manifest_media_c2_V1_2_default.xml
 vendor/lib/AVCSecureVdecCA.so
 vendor/lib/HEVCSecureVdecCA.so
 vendor/lib/VP9SecureVdecCA.so

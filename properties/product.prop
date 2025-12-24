@@ -23,5 +23,8 @@ ro.fm.fake_chan_3=10750 -205
 debug.hwui.skia_tracing_enabled=false
 debug.hwui.skia_use_perfetto_track_events=false
 
+# Product Name
+ro.product.marketname=Redmi Note 14
+
 # ZRAM writeback
 ro.zram_backing_device_min_free_mb=1536

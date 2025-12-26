@@ -31,6 +31,7 @@ ro.vendor.mtk_hifiaudio_support=1
 # Audio Volume
 ro.config.vc_call_vol_steps=11
 ro.config.vc_call_vol_default=9
+ro.config.media_vol_default=10
 
 # Bluetooth
 bluetooth.device_id.vendor_id=0x0046

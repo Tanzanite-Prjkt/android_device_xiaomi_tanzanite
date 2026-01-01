@@ -31,7 +31,6 @@ namespace_imports = [
     "hardware/xiaomi"
 ]
 
-
 lib_fixups: lib_fixups_user_type = {
     libs_clang_rt_ubsan: lib_fixup_remove_arch_suffix,
     libs_proto_3_9_1: lib_fixup_vendorcompat,
@@ -58,6 +57,10 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'vendor/lib64/hw/audio.primary.mediatek.so': blob_fixup()
+        .add_needed('libstagefright_foundation-v33.so')
+        .replace_needed('libalsautils.so', 'libalsautils-v31.so')
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
     "vendor/bin/hw/android.hardware.security.keymint@1.0-service.mitee": blob_fixup()
     .patchelf_version(patchelf_version)
     .replace_needed(
@@ -129,7 +132,8 @@ blob_fixups: blob_fixups_user_type = {
     "vendor/lib64/hw/mt6789/vendor.mediatek.hardware.pq@2.15-impl.so": blob_fixup()
     .patchelf_version(patchelf_version)
     .add_needed("android.hardware.sensors@1.0-convert-shared.so")
-    .replace_needed("libutils.so", "libutils-v32.so"),
+    .replace_needed("libutils.so", "libutils-v32.so")
+    .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
     (
         'vendor/lib64/libmorpho_Ldc.so',
         'vendor/lib64/libTrueSight.so',
@@ -165,6 +169,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libprocessgroup_shim.so'),
     'vendor/lib64/hw/vendor.xiaomi.sensor.citsensorservice@2.0-impl.so': blob_fixup()
         .add_needed('libui_shim.so'),
+    'vendor/lib64/librt_extamp_intf.so': blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

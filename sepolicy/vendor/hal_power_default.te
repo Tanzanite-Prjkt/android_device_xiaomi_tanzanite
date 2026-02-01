@@ -22,6 +22,8 @@ allow hal_power_default sysfs_dvfsrc_devfreq:file rw_file_perms;
 # Touchfeature (xiaomi-touch)
 allow hal_power_default touchfeature_device:chr_file rw_file_perms;
 
+allow hal_power_default cpu_dma_latency_device:chr_file rw_file_perms;
+
 # To get/set powerhal state property
 set_prop(hal_power_default, vendor_power_prop)
 

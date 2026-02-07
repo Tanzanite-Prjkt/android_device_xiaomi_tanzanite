@@ -193,5 +193,8 @@ WIFI_DRIVER_STATE_OFF := "0"
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 
+# Firmware
+include vendor/xiaomi/tanzanite-firmware/BoardConfigVendor.mk
+
 # Inherit the proprietary files
 include vendor/xiaomi/tanzanite/BoardConfigVendor.mk

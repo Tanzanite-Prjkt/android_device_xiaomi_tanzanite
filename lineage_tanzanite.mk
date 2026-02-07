@@ -14,6 +14,18 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 # Inherit from tanzanite device
 $(call inherit-product, device/xiaomi/tanzanite/device.mk)
 
+# Enable UI enhancements
+TARGET_ENABLE_BLUR := false
+PERF_ANIM_OVERRIDE := true
+
+# Enable features
+TARGET_SUPPORTS_QUICK_TAP := true
+BYPASS_CHARGE_SUPPORTED := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
+USE_PIXEL_CHARGING := true
+PERF_ANIM_OVERRIDE := true
+
+# Device identifier. This must come after all inclusions.
 PRODUCT_DEVICE := tanzanite
 PRODUCT_NAME := lineage_tanzanite
 PRODUCT_BRAND := Redmi

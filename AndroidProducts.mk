@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_tanzanite.mk
+    $(LOCAL_DIR)/afterlife_tanzanite.mk

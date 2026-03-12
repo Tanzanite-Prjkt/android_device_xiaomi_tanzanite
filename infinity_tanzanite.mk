@@ -9,7 +9,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/infinity/config/common_full_phone.mk)
 
 # Inherit from tanzanite device
 $(call inherit-product, device/xiaomi/tanzanite/device.mk)
@@ -24,9 +24,18 @@ BYPASS_CHARGE_SUPPORTED := true
 TARGET_FACE_UNLOCK_SUPPORTED := true
 USE_PIXEL_CHARGING := true
 
+# Maintainer Name
+INFINITY_MAINTAINER := Yaseakun
+
+# Whether the device supports Fingerprint On Display
+TARGET_HAS_UDFPS := true
+
+# Whether Including Google Apps
+WITH_GAPPS := true
+
 # Device identifier. This must come after all inclusions.
 PRODUCT_DEVICE := tanzanite
-PRODUCT_NAME := lineage_tanzanite
+PRODUCT_NAME := infinity_tanzanite
 PRODUCT_BRAND := Redmi
 PRODUCT_MODEL := 24117RN76O
 PRODUCT_MANUFACTURER := xiaomi

@@ -97,7 +97,6 @@ persist.vendor.connsys.fm_chipid=mt6631_6635
 persist.sys.fuse.passthrough.enable=true
 
 # Graphics
-debug.graphics.game_default_frame_rate.disabled=true
 graphics.gpu.profiler.support=true
 ro.hardware.egl=mali
 ro.hardware.gralloc=common
@@ -272,6 +271,7 @@ ro.surface_flinger.supports_background_blur=1
 ro.surface_flinger.use_color_management=true
 ro.surface_flinger.use_content_detection_for_refresh_rate=true
 ro.surface_flinger.wcg_composition_dataspace=143261696
+ro.surface_flinger.game_default_frame_rate_override=120
 
 # Storage
 external_storage.casefold.enabled=1

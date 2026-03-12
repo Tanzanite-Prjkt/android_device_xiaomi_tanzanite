@@ -407,5 +407,8 @@ PRODUCT_PACKAGES += \
 # GameBar
 $(call inherit-product-if-exists, packages/apps/GameBar/gamebar.mk)
 
+# Inherit Private Keys
+-include vendor/lineage-priv/keys/keys.mk
+
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/tanzanite/tanzanite-vendor.mk)

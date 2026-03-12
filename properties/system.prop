@@ -97,6 +97,11 @@ ro.iorapd.enable=false
 # async property set
 ro.property_service.async_persist_writes=true
 
+# Example Defintions
+ro.product.marketname=Redmi Note 14 4G
+ro.infinity.soc=Mediatek Helio G99 Ultra
+ro.infinity.camera=108MP + 2MP + Auxiliary lens
+
 # Graphics / SurfaceFlinger
 ro.surface_flinger.support_content_type=false
 

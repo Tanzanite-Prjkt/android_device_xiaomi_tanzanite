@@ -54,9 +54,19 @@ on init
 
     # Boot time tuning
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "performance"
-    write /sys/devices/system/cpu/cpufreq/policy4/scaling_governor "performance"
-    write /sys/devices/system/cpu/cpufreq/policy7/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "performance"
     write /sys/devices/platform/soc/112b0000.ufshci/clkgate_enable 0
+
+    # Schedutil tunings
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us 500
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us 2000
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/up_rate_limit_us 500
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/down_rate_limit_us 2000
 
     # Set teo as cpu idle governor
     write /sys/devices/system/cpu/cpuidle/current_governor teo
@@ -125,12 +135,43 @@ on property:sys.boot_completed=1
     # Enable PowerHAL hint processing
     setprop vendor.powerhal.init 1
 
+    # MTK FPSGO and PerfMgr
+
+    write /sys/module/mtk_fpsgo/parameters/fbt_enable 1
+
+    write /sys/module/mtk_fpsgo/parameters/boost_affinity 1
+
+    write /sys/kernel/debug/fpsgo/common/fpsgo_enable 1
+
+    write /proc/perfmgr/smart/smart_force_isolate 0
+
+
+    # I/O and VM tuning
+
+    write /sys/block/sda/queue/nr_requests 1024
+
+    write /sys/block/sda/queue/read_ahead_kb 512
+
+    write /proc/sys/vm/swappiness 10
+
+    write /proc/sys/vm/vfs_cache_pressure 100
+
+    write /proc/sys/vm/page-cluster 0
+
     # batterysecret
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/usbpd_verifed
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/request_vdm_cmd
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/verify_process
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/pd_auth
     start batterysecret
+
+    # fstrim
+
+    exec /system/bin/fstrim -v /data
+
+    exec /system/bin/fstrim -v /cache
+
+    exec /system/bin/fstrim -v /system
 
     # Adjust watermark level
     write /proc/sys/vm/watermark_scale_factor 200
@@ -141,9 +182,19 @@ on property:sys.boot_completed=1
 
     # End boot time tuning
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "schedutil"
-    write /sys/devices/system/cpu/cpufreq/policy4/scaling_governor "schedutil"
-    write /sys/devices/system/cpu/cpufreq/policy7/scaling_governor "schedutil"
+    write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "schedutil"
+    write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "schedutil"
     write /sys/devices/platform/soc/112b0000.ufshci/clkgate_enable 0
+
+    # Schedutil tunings
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us 500
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us 2000
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/up_rate_limit_us 500
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/down_rate_limit_us 2000
 
     # Set GPU governor to simple_ondemand
     write /sys/devices/platform/soc/13000000.mali/devfreq/13000000.mali/governor "simple_ondemand"
@@ -154,6 +205,14 @@ on charger
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/verify_process
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/pd_auth
     start batterysecret
+
+    # fstrim
+
+    exec /system/bin/fstrim -v /data
+
+    exec /system/bin/fstrim -v /cache
+
+    exec /system/bin/fstrim -v /system
 
 service vendor.gralloc-4-0 /vendor/bin/hw/mt6789/android.hardware.graphics.allocator@4.0-service-mediatek.mt6789
     class hal animation

@@ -131,8 +131,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.3-service \
     android.hardware.memtrack-service.mediatek \
-    android.software.vulkan.deqp.level-2021-03-01.prebuilt.xml \
-    android.software.opengles.deqp.level-2021-03-01.prebuilt.xml
+    android.software.vulkan.deqp.level-2024-03-01.prebuilt.xml \
+    android.software.opengles.deqp.level-2024-03-01.prebuilt.xml
 
 PRODUCT_PACKAGES += \
     MinRefreshRateCtrl

@@ -4,4 +4,12 @@ rw_dir_file(vendor_init, proc)
 set_prop(vendor_init, vendor_batterysecret_prop)
 set_prop(vendor_init, vendor_sensors_prop)
 
+allow vendor_init sysfs_ged:dir search;
+allow vendor_init sysfs_ged:file w_file_perms;
+
+allow vendor_init sysfs_dvfsrc_devfreq:dir r_dir_perms;
+allow vendor_init sysfs_dvfsrc_devfreq:file rw_file_perms;
+
+allow vendor_init proc_sched:file w_file_perms;
+
 set_prop(vendor_init, vendor_fingerprint_prop)

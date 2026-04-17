@@ -560,4 +560,12 @@
 
     <!-- Indicating if ringtone vibration settings supported or not. -->
     <bool name="config_ringtoneVibrationSettingsSupported">true</bool>
+
+    <!-- GameBar configs -->
+    <string name="config_gpu_usage_path">/sys/kernel/ged/hal/gpu_utilization</string>
+    <string name="config_gpu_clock_path">/sys/kernel/ged/hal/total_gpu_freq_mhz</string>
+    <string name="config_ram_freq_path">/sys/class/devfreq/mtk-dvfsrc-devfreq/cur_freq</string>
+    <string name="config_gpu_temp_path">dynamic</string>
+    <string name="config_ram_temp_path">dynamic</string>
+    <string name="config_cpu_temp_path">dynamic</string>
 </resources>

@@ -401,5 +401,8 @@ PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_PACKAGES += \
     android.hardware.vibrator-service.mediatek
 
+# GameBar
+$(call inherit-product-if-exists, packages/apps/GameBar/gamebar.mk)
+
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/tanzanite/tanzanite-vendor.mk)

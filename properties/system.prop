@@ -3,6 +3,38 @@ vendor.rild.libpath=mtk-ril.so
 vendor.rild.libargs=-d /dev/ttyC0
 ro.radio.device_type=1
 
+# Network
+net.tcp.262144,524288,1048576,262144,524288,1048576=1
+ro.telephony.call_ring.delay=0
+ro.ril.disable.power.collapse=0
+
+# Memory
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=1440
+persist.sys.zram_enabled=1
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heapgrowthlimit=256m
+dalvik.vm.heapsize=512m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+ro.config.max_starting_bg=16
+ro.MAX_HIDDEN_APPS=64
+cached_apps_limit=64
+ro.lmk.kill_heaviest_task=true
+ro.lmk.upgrade_pressure=40
+ro.lmk.downgrade_pressure=30
+ro.lmk.thrashing_limit_decay=50
+
+# Audio
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.fluence.speaker=true
+persist.audio.lowlatency=1
+ro.config.vc_call_vol_steps=14
+persist.vendor.audio.vpp.enable=0
+persist.sys.audio.spatializer.enabled=false
+persist.device_config.runtime_native.us_pinner_v2=true
+
 # Connsys
 persist.vendor.connsysfw.enable=true
 

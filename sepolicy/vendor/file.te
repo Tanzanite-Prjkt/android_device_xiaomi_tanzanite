@@ -26,3 +26,4 @@ type vendor_sysfs_thermalconfig, sysfs_type, fs_type;
 
 # Perf
 type proc_vm_dirty, fs_type, proc_type;
+type proc_printk, fs_type, proc_type;

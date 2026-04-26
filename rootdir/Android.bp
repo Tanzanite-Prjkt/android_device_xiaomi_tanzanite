@@ -31,6 +31,12 @@ sh_binary {
     vendor: true
 }
 
+sh_binary {
+    name: "overheat_fix.sh",
+    src: "bin/overheat_fix.sh",
+    vendor: true
+}
+
 prebuilt_etc {
     name: "init.insmod.mtk.cfg",
     src: "etc/init.insmod.mtk.cfg",
@@ -54,6 +60,13 @@ prebuilt_etc {
 prebuilt_etc {
     name: "init.modem.rc",
     src: "etc/init/hw/init.modem.rc",
+    sub_dir: "init/hw",
+    vendor: true
+}
+
+prebuilt_etc {
+    name: "init.overheat_fix.rc",
+    src: "etc/init/hw/init.overheat_fix.rc",
     sub_dir: "init/hw",
     vendor: true
 }

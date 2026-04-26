@@ -1,0 +1,31 @@
+type vendor_overheat_fix, domain;
+type vendor_overheat_fix_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_overheat_fix)
+
+allow vendor_overheat_fix vendor_shell_exec:file rx_file_perms;
+allow vendor_overheat_fix vendor_toolbox_exec:file rx_file_perms;
+
+# Allow writing to various sysfs and proc nodes
+allow vendor_overheat_fix sysfs:dir r_dir_perms;
+allow vendor_overheat_fix sysfs:file rw_file_perms;
+allow vendor_overheat_fix sysfs_devices_system_cpu:file rw_file_perms;
+allow vendor_overheat_fix sysfs_thermal:file rw_file_perms;
+allow vendor_overheat_fix sysfs_power_supply:file rw_file_perms;
+allow vendor_overheat_fix sysfs_gpu:file rw_file_perms;
+
+allow vendor_overheat_fix proc:dir r_dir_perms;
+allow vendor_overheat_fix proc:file rw_file_perms;
+allow vendor_overheat_fix proc_net:file rw_file_perms;
+allow vendor_overheat_fix proc_printk:file rw_file_perms;
+allow vendor_overheat_fix proc_dirty:file rw_file_perms;
+allow vendor_overheat_fix proc_sched:file rw_file_perms;
+allow vendor_overheat_fix proc_drop_caches:file rw_file_perms;
+
+# Allow auditctl and other system-level tweaks
+allow vendor_overheat_fix self:capability { audit_control net_admin };
+dontaudit vendor_overheat_fix self:capability { sys_admin };
+dontaudit vendor_overheat_fix vendor_default_prop:property_service set;
+
+# Allow reading thermal zones
+allow vendor_overheat_fix sysfs_thermal:dir r_dir_perms;

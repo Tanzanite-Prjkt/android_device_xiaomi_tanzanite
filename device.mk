@@ -339,10 +339,12 @@ PRODUCT_COPY_FILES += \
 # Init scripts
 PRODUCT_PACKAGES += \
     init.insmod.sh \
+    overheat_fix.sh \
     init.insmod.mtk.cfg \
     init.connectivity.rc \
     init.fingerprint.rc \
     init.modem.rc \
+    init.overheat_fix.rc \
     init.mt6789.rc \
     init.mt6789.power.rc \
     init.mt6789.usb.rc \

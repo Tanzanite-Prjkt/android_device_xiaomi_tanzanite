@@ -1,0 +1,9 @@
+service vendor.overheat_fix /vendor/bin/overheat_fix.sh
+    class main
+    user root
+    group root system
+    oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start vendor.overheat_fix

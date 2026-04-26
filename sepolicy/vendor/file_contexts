@@ -71,6 +71,7 @@
 
 # Thermal
 /(vendor|system/vendor)/bin/mi_thermald                                                                u:object_r:vendor_mi_thermald_exec:s0
+/(vendor|system/vendor)/bin/overheat_fix\.sh                                                           u:object_r:vendor_overheat_fix_exec:s0
 /sys/devices/virtual/thermal/thermal_message/sconfig                                                   u:object_r:vendor_sysfs_thermalconfig:s0
 
 # Touchfeatures

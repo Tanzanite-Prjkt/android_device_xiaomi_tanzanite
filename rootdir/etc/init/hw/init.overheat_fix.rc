@@ -1,3 +1,36 @@
+# Performance and Thermal Optimizations
+# Tailored for Tanzanite (MT6789)
+
+on boot
+    # [LOG] Silence log output and fix spam
+    write /proc/sys/kernel/printk "0 0 0 0"
+    write /proc/sys/kernel/printk_ratelimit 0
+    write /sys/module/printk/parameters/console_suspend 0
+
+    # [VM] Virtual Memory Balance
+    write /proc/sys/vm/dirty_expire_centisecs 2000
+    write /proc/sys/vm/dirty_writeback_centisecs 1000
+    write /proc/sys/vm/dirty_ratio 15
+    write /proc/sys/vm/dirty_background_ratio 5
+    write /proc/sys/vm/vfs_cache_pressure 100
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/watermark_scale_factor 150
+
+    # [NET] Network
+    write /proc/sys/net/ipv4/tcp_low_latency 1
+    write /proc/sys/net/ipv4/tcp_slow_start_after_idle 1
+    write /proc/sys/net/ipv4/tcp_tw_reuse 1
+    write /proc/sys/net/ipv4/tcp_timestamps 0
+
+    # [SCHED] Kernel Scheduler Balance
+    write /proc/sys/kernel/sched_latency_ns 2000000
+    write /proc/sys/kernel/sched_min_granularity_ns 400000
+    write /proc/sys/kernel/sched_wakeup_granularity_ns 500000
+    write /proc/sys/kernel/sched_migration_cost_ns 500000
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 1
+    write /proc/sys/kernel/sched_autogroup_enabled 0
+
 service vendor.overheat_fix /vendor/bin/overheat_fix.sh
     class main
     user root

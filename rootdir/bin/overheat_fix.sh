@@ -1,27 +1,24 @@
 #!/system/bin/sh
-# Performance Fix v2.5.1 (Helio G99 - Direct Fix)
+# Performance Fix v2.6.0 (Helio G99 - Optimized)
 # Author: aerichandesu
 
 MODDIR=${0%/*}
 
 write() {
     if [ -f "$2" ]; then
+        # Check if the value is already set to avoid unnecessary writes
+        [ "$(cat "$2" 2>/dev/null)" = "$1" ] && return
         chmod 666 "$2" 2>/dev/null
         echo "$1" > "$2" 2>/dev/null
     fi
 }
 
-# [LOG] Silence log output and fix AIDL/Millet/WLAN spam
+# [LOG] Silence log output and fix spam
 write "0 0 0 0" /proc/sys/kernel/printk
 write 0 /proc/sys/kernel/printk_ratelimit
 write 0 /sys/module/printk/parameters/console_suspend
-# Fix audit/SELinux rate limit spam
 auditctl -e 0 2>/dev/null
 auditctl -r 0 2>/dev/null
-
-# Restore Millet userspace to fix kernel "src_port 2 invalid" IPC errors
-# Millet is left default to prevent IPC mismatch
-# setprop calls removed to avoid SEPolicy neverallow violations
 
 # [SCHED] Adaptive Energy Scaling
 write 5 /dev/cpuctl/top-app/cpu.uclamp.min
@@ -52,16 +49,21 @@ write 1 /proc/sys/net/ipv4/tcp_low_latency
 write 1 /proc/sys/net/ipv4/tcp_slow_start_after_idle
 write 1 /proc/sys/net/ipv4/tcp_tw_reuse
 write 0 /proc/sys/net/ipv4/tcp_timestamps
-write 0 /proc/sys/net/ipv4/tcp_ecn
 
 # [IO] Storage (UFS 2.2 Efficiency)
 for disk in /sys/block/sd* /sys/block/mmcblk*; do
+    [ -d "$disk" ] || continue
     write 256 $disk/queue/nr_requests
     write 256 $disk/queue/read_ahead_kb
     write 0 $disk/queue/add_random
     write 1 $disk/queue/nomerges
     write 0 $disk/queue/iostats
-    echo "none" > $disk/queue/scheduler 2>/dev/null
+    # Use mq-deadline if none is not available for better stability
+    if grep -q "none" $disk/queue/scheduler; then
+        echo "none" > $disk/queue/scheduler 2>/dev/null
+    else
+        echo "mq-deadline" > $disk/queue/scheduler 2>/dev/null
+    fi
 done
 
 # [SCHED] Kernel Scheduler Balance
@@ -72,48 +74,47 @@ write 500000 /proc/sys/kernel/sched_migration_cost_ns
 write 1 /proc/sys/kernel/sched_util_clamp_min_rt_default
 write 0 /proc/sys/kernel/sched_autogroup_enabled
 
-# Background loop for thermal and performance tasks
+# Background loop for thermal control
 (
-    sleep 30
+    # Initial sleep to let the system boot up
+    sleep 45
+    
+    # Get max frequencies dynamically
+    MAX_FREQ_LITTLE=$(cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq 2>/dev/null)
+    MAX_FREQ_BIG=$(cat /sys/devices/system/cpu/cpufreq/policy6/cpuinfo_max_freq 2>/dev/null)
+    
     while true; do
-        # 1. Thermal control
         BAT_TEMP=$(cat /sys/class/thermal/thermal_zone25/temp 2>/dev/null)
         SOC_TEMP=$(cat /sys/class/thermal/thermal_zone0/temp 2>/dev/null)
         [ -z "$BAT_TEMP" ] && BAT_TEMP=0
         [ -z "$SOC_TEMP" ] && SOC_TEMP=0
 
-        # High heat (> 45°C Battery or > 70°C SOC)
-        if [ "$BAT_TEMP" -ge 45000 ] || [ "$SOC_TEMP" -ge 70000 ]; then
+        # Critical Overheat (> 45°C Battery or > 75°C SOC)
+        if [ "$BAT_TEMP" -ge 45000 ] || [ "$SOC_TEMP" -ge 75000 ]; then
             write 16 /sys/class/power_supply/battery/charge_control_limit
             write 1 /sys/class/power_supply/battery/input_suspend
-            write 1500000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
-            write 1500000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
-        # Moderate heat (43°C - 44°C Battery)
-        elif [ "$BAT_TEMP" -ge 43000 ]; then
-            write 14 /sys/class/power_supply/battery/charge_control_limit
-            write 1 /sys/class/power_supply/battery/input_suspend
-            write 1900000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
-            write 1700000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
-        # Warm (40°C - 42°C Battery)
-        elif [ "$BAT_TEMP" -ge 40000 ]; then
+            write 1400000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+            write 1400000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
+        # Moderate Heat (42°C - 44°C Battery)
+        elif [ "$BAT_TEMP" -ge 42000 ]; then
             write 12 /sys/class/power_supply/battery/charge_control_limit
             write 0 /sys/class/power_supply/battery/input_suspend
-            write 2000000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
-            write 2200000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
-        # Cool (< 38°C Battery)
-        elif [ "$BAT_TEMP" -le 38000 ]; then
+            write 1800000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+            write 1800000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
+        # Normal / Cool (< 40°C Battery)
+        else
             write 0 /sys/class/power_supply/battery/charge_control_limit
             write 0 /sys/class/power_supply/battery/input_suspend
-            write 2000000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
-            write 2200000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
+            [ -n "$MAX_FREQ_LITTLE" ] && write "$MAX_FREQ_LITTLE" /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+            [ -n "$MAX_FREQ_BIG" ] && write "$MAX_FREQ_BIG" /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
         fi
         
-        # 2. Refresh rate control
-        # Left disabled to fix MTK Display CRTC "mtk_dsc_sw_rst not attach CRTC yet" log loop
-        # setprop persist.vendor.display.mode.vrr.enabled 0 2>/dev/null
-        # setprop persist.vendor.display.mode.fps.switch 0 2>/dev/null
-        
-        sleep 30
+        # Faster polling during heat (10s), slower when cool (30s)
+        if [ "$BAT_TEMP" -ge 40000 ]; then
+            sleep 10
+        else
+            sleep 30
+        fi
     done
 ) &
 

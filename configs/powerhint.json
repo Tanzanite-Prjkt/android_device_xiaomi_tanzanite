@@ -346,6 +346,25 @@
         "0,1,2,3,4,5,6,7"
       ],
       "Type": "Property"
+    },
+    {
+      "Name": "ChargeControlLimit",
+      "Path": "/sys/class/power_supply/battery/charge_control_limit",
+      "Values": [
+        "0",
+        "12",
+        "16"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "InputSuspend",
+      "Path": "/sys/class/power_supply/battery/input_suspend",
+      "Values": [
+        "0",
+        "1"
+      ],
+      "ResetOnInit": true
     }
   ],
   "Actions": [
@@ -538,6 +557,54 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Type": "EndHint",
       "Value": "INTERACTION"
+    },
+    {
+      "PowerHint": "THERMAL_MODERATE",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 0,
+      "Value": "1800000"
+    },
+    {
+      "PowerHint": "THERMAL_MODERATE",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 0,
+      "Value": "1800000"
+    },
+    {
+      "PowerHint": "THERMAL_MODERATE",
+      "Node": "ChargeControlLimit",
+      "Duration": 0,
+      "Value": "12"
+    },
+    {
+      "PowerHint": "THERMAL_MODERATE",
+      "Node": "InputSuspend",
+      "Duration": 0,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "THERMAL_SEVERE",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 0,
+      "Value": "1400000"
+    },
+    {
+      "PowerHint": "THERMAL_SEVERE",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 0,
+      "Value": "1400000"
+    },
+    {
+      "PowerHint": "THERMAL_SEVERE",
+      "Node": "ChargeControlLimit",
+      "Duration": 0,
+      "Value": "16"
+    },
+    {
+      "PowerHint": "THERMAL_SEVERE",
+      "Node": "InputSuspend",
+      "Duration": 0,
+      "Value": "1"
     }
   ]
 }

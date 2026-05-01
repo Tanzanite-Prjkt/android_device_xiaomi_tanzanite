@@ -1,5 +1,6 @@
 # Performance and Thermal Optimizations
 # Tailored for Tanzanite (MT6789)
+# Native implementation by aerichandesu
 
 on boot
     # [LOG] Silence log output and fix spam
@@ -31,12 +32,39 @@ on boot
     write /proc/sys/kernel/sched_util_clamp_min_rt_default 1
     write /proc/sys/kernel/sched_autogroup_enabled 0
 
-service vendor.overheat_fix /vendor/bin/overheat_fix.sh
-    class main
-    user root
-    group root system
-    oneshot
-    disabled
-
 on property:sys.boot_completed=1
-    start vendor.overheat_fix
+    # [SCHED] Adaptive Energy Scaling
+    write /dev/cpuctl/top-app/cpu.uclamp.min 5
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/foreground/cpu.uclamp.min 0
+    write /dev/cpuctl/foreground/cpu.uclamp.max 100
+
+    # [GED] Adaptive MediaTek Graphics
+    write /sys/module/ged/parameters/gpu_dvfs_enable 1
+    write /sys/module/ged/parameters/ged_smart_boost 1
+    write /sys/module/ged/parameters/ged_boost_enable 0
+    write /sys/module/ged/parameters/gx_fb_dvfs_margin 10
+    write /sys/module/ged/parameters/ged_log_trace_enable 0
+    write /sys/module/ged/parameters/ged_log_perf_trace_enable 0
+
+    # [IO] Storage Efficiency (UFS 2.2)
+    write /sys/block/sda/queue/nr_requests 256
+    write /sys/block/sda/queue/read_ahead_kb 256
+    write /sys/block/sda/queue/add_random 0
+    write /sys/block/sda/queue/nomerges 1
+    write /sys/block/sda/queue/iostats 0
+    write /sys/block/sda/queue/scheduler mq-deadline
+
+    write /sys/block/sdb/queue/nr_requests 256
+    write /sys/block/sdb/queue/read_ahead_kb 256
+    write /sys/block/sdb/queue/add_random 0
+    write /sys/block/sdb/queue/nomerges 1
+    write /sys/block/sdb/queue/iostats 0
+    write /sys/block/sdb/queue/scheduler mq-deadline
+
+    write /sys/block/sdc/queue/nr_requests 256
+    write /sys/block/sdc/queue/read_ahead_kb 256
+    write /sys/block/sdc/queue/add_random 0
+    write /sys/block/sdc/queue/nomerges 1
+    write /sys/block/sdc/queue/iostats 0
+    write /sys/block/sdc/queue/scheduler mq-deadline

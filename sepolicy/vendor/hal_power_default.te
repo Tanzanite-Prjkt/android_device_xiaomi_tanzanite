@@ -10,7 +10,7 @@ allow hal_power_default sysfs_ged:dir search;
 allow hal_power_default sysfs_ged:file rw_file_perms;
 allow hal_power_default vendor_sysfs_thermalconfig:file rw_file_perms;
 allow hal_power_default sysfs_therm:dir search;
-
+allow hal_power_default sysfs_power_supply:dir search;
 
 r_dir_file(hal_power_default, proc_gpufreqv2)
 allow hal_power_default proc_gpufreqv2:file rw_file_perms;

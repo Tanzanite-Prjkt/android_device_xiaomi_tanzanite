@@ -25,15 +25,9 @@ write() {
 # 1. Maintenance and Cleanup (Pre-boot completion)
 log_info "Starting boot-time maintenance..."
 
-# Clear GMS phenotype cache (helps with various GMS-related battery drain/lags)
-# Note: Vendor domain might have restricted access to /data/data
-rm -rf /data/data/com.google.android.gms/app_phenotype 2>/dev/null
-rm -rf /data/system/users/0/com.google.android.gms.phenotype 2>/dev/null
-
-# Clear system logs and tombstones
-rm -rf /data/system/dropbox/* 2>/dev/null
-rm -rf /data/tombstones/* 2>/dev/null
-chmod 777 /data/local/tmp 2>/dev/null
+# Note: Maintenance of /data/data and /data/system is moved to system-level 
+# or removed to comply with SEPolicy neverallows.
+chmod 777 /data/local/tmp 2>/dev/null || true
 
 # 2. Dynamic Thermal Management Loop
 log_info "Waiting for boot completion..."

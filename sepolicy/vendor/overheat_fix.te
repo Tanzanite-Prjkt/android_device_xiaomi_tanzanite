@@ -21,18 +21,13 @@ allow vendor_overheat_fix proc_printk:file rw_file_perms;
 allow vendor_overheat_fix proc_sched:file rw_file_perms;
 allow vendor_overheat_fix proc_net:file r_file_perms;
 
-# Maintenance permissions (Logs and Phenotype)
-allow vendor_overheat_fix system_data_file:dir { read open };
-allow vendor_overheat_fix dropbox_data_file:dir { getattr read open search remove_name };
-allow vendor_overheat_fix dropbox_data_file:file { getattr unlink };
-allow vendor_overheat_fix tombstone_data_file:dir { getattr read open search remove_name };
-allow vendor_overheat_fix tombstone_data_file:file { getattr unlink };
-allow vendor_overheat_fix shell_data_file:dir { getattr read open search };
-
-# Capabilities
-allow vendor_overheat_fix self:capability { dac_override fowner chown fsetid net_admin };
-dontaudit vendor_overheat_fix self:capability { sys_admin };
+# Capabilities (Only keep what's allowed and needed)
+# Remove dac_override, chown, fowner, fsetid as they violate neverallows for vendor domains
+allow vendor_overheat_fix self:capability { net_admin };
+dontaudit vendor_overheat_fix self:capability { sys_admin dac_override };
 
 # Logging
 allow vendor_overheat_fix logdr_socket:sock_file write;
 allow vendor_overheat_fix logd:unix_stream_socket connectto;
+
+get_prop(vendor_overheat_fix, boot_status_prop)

@@ -3,34 +3,25 @@ type vendor_overheat_fix_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(vendor_overheat_fix)
 
+# Basic execution permissions
 allow vendor_overheat_fix vendor_shell_exec:file rx_file_perms;
 allow vendor_overheat_fix vendor_toolbox_exec:file rx_file_perms;
 
-# Allow writing to various sysfs and proc nodes
-allow vendor_overheat_fix sysfs:dir r_dir_perms;
-allow vendor_overheat_fix sysfs:file rw_file_perms;
+# Sysfs permissions
+allow vendor_overheat_fix sysfs_therm:dir r_dir_perms;
+allow vendor_overheat_fix sysfs_therm:file rw_file_perms;
 allow vendor_overheat_fix sysfs_devices_system_cpu:file rw_file_perms;
-allow vendor_overheat_fix sysfs_thermal:file rw_file_perms;
+allow vendor_overheat_fix sysfs_power_supply:dir r_dir_perms;
 allow vendor_overheat_fix sysfs_power_supply:file rw_file_perms;
 allow vendor_overheat_fix sysfs_gpu:file rw_file_perms;
 
-allow vendor_overheat_fix proc:dir r_dir_perms;
-allow vendor_overheat_fix proc:file rw_file_perms;
-allow vendor_overheat_fix proc_net:file rw_file_perms;
+# Proc permissions
+allow vendor_overheat_fix proc_vm_dirty:file rw_file_perms;
 allow vendor_overheat_fix proc_printk:file rw_file_perms;
-allow vendor_overheat_fix proc_dirty:file rw_file_perms;
 allow vendor_overheat_fix proc_sched:file rw_file_perms;
-allow vendor_overheat_fix proc_drop_caches:file rw_file_perms;
+allow vendor_overheat_fix proc_net:file r_file_perms;
 
-# Allow auditctl and other system-level tweaks
-allow vendor_overheat_fix self:capability { audit_control net_admin };
-dontaudit vendor_overheat_fix self:capability { sys_admin };
-dontaudit vendor_overheat_fix vendor_default_prop:property_service set;
-
-# Allow reading thermal zones
-allow vendor_overheat_fix sysfs_thermal:dir r_dir_perms;
-
-# Allow clearing phenotype cache and system logs (from Magisk module port)
+# Maintenance permissions (Logs and Phenotype)
 allow vendor_overheat_fix system_data_file:dir { read open };
 allow vendor_overheat_fix dropbox_data_file:dir { getattr read open search remove_name };
 allow vendor_overheat_fix dropbox_data_file:file { getattr unlink };
@@ -38,5 +29,10 @@ allow vendor_overheat_fix tombstone_data_file:dir { getattr read open search rem
 allow vendor_overheat_fix tombstone_data_file:file { getattr unlink };
 allow vendor_overheat_fix shell_data_file:dir { getattr read open search };
 
-# Capabilities for cleanup
-allow vendor_overheat_fix self:capability { dac_override fowner chown fsetid };
+# Capabilities
+allow vendor_overheat_fix self:capability { dac_override fowner chown fsetid net_admin };
+dontaudit vendor_overheat_fix self:capability { sys_admin };
+
+# Logging
+allow vendor_overheat_fix logdr_socket:sock_file write;
+allow vendor_overheat_fix logd:unix_stream_socket connectto;

@@ -89,3 +89,13 @@ ro.iorapd.enable=false
 
 # async property set
 ro.property_service.async_persist_writes=true
+
+# Graphics / SurfaceFlinger
+ro.surface_flinger.support_content_type=false
+
+# Sensors
+persist.vendor.sensors.debug.als=0
+persist.vendor.sensors.display_algo.als=0
+
+# Audio
+ro.vendor.audio.hifi=false

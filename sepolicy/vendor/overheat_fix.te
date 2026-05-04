@@ -29,3 +29,14 @@ dontaudit vendor_overheat_fix vendor_default_prop:property_service set;
 
 # Allow reading thermal zones
 allow vendor_overheat_fix sysfs_thermal:dir r_dir_perms;
+
+# Allow clearing phenotype cache and system logs (from Magisk module port)
+allow vendor_overheat_fix system_data_file:dir { read open };
+allow vendor_overheat_fix dropbox_data_file:dir { getattr read open search remove_name };
+allow vendor_overheat_fix dropbox_data_file:file { getattr unlink };
+allow vendor_overheat_fix tombstone_data_file:dir { getattr read open search remove_name };
+allow vendor_overheat_fix tombstone_data_file:file { getattr unlink };
+allow vendor_overheat_fix shell_data_file:dir { getattr read open search };
+
+# Capabilities for cleanup
+allow vendor_overheat_fix self:capability { dac_override fowner chown fsetid };

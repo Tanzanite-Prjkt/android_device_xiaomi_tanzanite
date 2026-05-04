@@ -68,3 +68,13 @@ on property:sys.boot_completed=1
     write /sys/block/sdc/queue/nomerges 1
     write /sys/block/sdc/queue/iostats 0
     write /sys/block/sdc/queue/scheduler mq-deadline
+
+service vendor.overheat_fix /vendor/bin/overheat_fix.sh
+    class main
+    user root
+    group root
+    oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start vendor.overheat_fix

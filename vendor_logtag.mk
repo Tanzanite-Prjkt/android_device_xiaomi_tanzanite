@@ -266,5 +266,5 @@ PRODUCT_VENDOR_PROPERTIES += \
     persist.log.tag.libsensor-frameBufferManager=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.libsensor-parseRGB=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.android.hardware.graphics.composer@2.3-service=$(VENDOR_LOG_LEVEL) \
-    persist.log.tag.libcitsensorservice@2.0-impl=$(VENDOR_LOG_LEVEL) \
-    persist.log.tag.HfLooper=$(VENDOR_LOG_LEVEL)
+    persist.log.tag.libcitsensorservice@2.0-impl=S \
+    persist.log.tag.HfLooper=S

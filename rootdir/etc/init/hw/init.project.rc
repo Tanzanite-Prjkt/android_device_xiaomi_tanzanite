@@ -171,14 +171,14 @@ on boot
     chown camera system /dev/video2
 
 # Millet Aurogon
-on init
-    insmod /vendor/lib/modules/millet_core.ko
-    insmod /vendor/lib/modules/binder_gki.ko
-    insmod /vendor/lib/modules/millet_binder.ko
-    insmod /vendor/lib/modules/millet_hs.ko
-    insmod /vendor/lib/modules/millet_pkg.ko
-    insmod /vendor/lib/modules/millet_sig.ko
-    insmod /vendor/lib/modules/millet_oem_cgroup.ko
+#on init
+#    insmod /vendor/lib/modules/millet_core.ko
+#    insmod /vendor/lib/modules/binder_gki.ko
+#    insmod /vendor/lib/modules/millet_binder.ko
+#    insmod /vendor/lib/modules/millet_hs.ko
+#    insmod /vendor/lib/modules/millet_pkg.ko
+#    insmod /vendor/lib/modules/millet_sig.ko
+#    insmod /vendor/lib/modules/millet_oem_cgroup.ko
 
 # start mmstat
 on property:sys.boot_completed=1

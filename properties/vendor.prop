@@ -157,6 +157,10 @@ ro.lmk.use_minfree_levels=false
 ro.lmk.thrashing_limit_decay=50
 ro.lmk.downgrade_pressure=30
 
+# Millet
+persist.sys.millet.disable=1
+vendor.millet.disable=1
+
 # Media
 media.c2.hal.selection=aidl
 debug.stagefright.c2inputsurface=-1

@@ -21,10 +21,8 @@ allow vendor_overheat_fix proc_printk:file rw_file_perms;
 allow vendor_overheat_fix proc_sched:file rw_file_perms;
 allow vendor_overheat_fix proc_net:file r_file_perms;
 
-# Capabilities (Only keep what's allowed and needed)
-# Remove dac_override, chown, fowner, fsetid as they violate neverallows for vendor domains
-allow vendor_overheat_fix self:capability { net_admin };
-dontaudit vendor_overheat_fix self:capability { sys_admin dac_override };
+# Capabilities
+dontaudit vendor_overheat_fix self:capability { sys_admin dac_override setattr };
 
 # Logging
 allow vendor_overheat_fix logdr_socket:sock_file write;

@@ -747,3 +747,9 @@ service statsd /apex/com.android.os.statsd/bin/statsd
     task_profiles ProcessCapacityHigh HighEnergySaving
     override
     disabled
+
+# Disable miteelog service
+service miteelog /vendor/bin/miteelog
+    override
+    disabled
+    oneshot

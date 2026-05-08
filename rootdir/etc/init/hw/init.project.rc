@@ -205,8 +205,3 @@ on boot && property:ro.boot.product.hardware.sku=tanzanite_e_eea
 
 on boot && property:ro.boot.product.hardware.sku=tanzanite_n_gl
     enable vendor.nfc_hal_service
-
-# Disable miteelog service
-service miteelog /vendor/bin/miteelog
-    override
-    disabled

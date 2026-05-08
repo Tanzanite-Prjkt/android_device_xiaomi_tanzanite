@@ -289,7 +289,7 @@ ro.surface_flinger.has_HDR_display=true
 ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 ro.surface_flinger.vsync_event_phase_offset_ns=2000000
 ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
-ro.surface_flinger.set_idle_timer_ms=80
+ro.surface_flinger.set_idle_timer_ms=0
 
 # Storage
 external_storage.casefold.enabled=1

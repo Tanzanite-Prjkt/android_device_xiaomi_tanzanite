@@ -49,7 +49,7 @@ while true; do
     [ -z "$BAT_TEMP" ] && BAT_TEMP=0
     [ -z "$SOC_TEMP" ] && SOC_TEMP=0
 
-    # Logic: Aggressive Cooling
+    # Logic: Dynamic Thermal Management
     # High heat (> 43°C Battery or > 65°C SoC) - Critical Throttling
     if [ "$BAT_TEMP" -ge 43000 ] || [ "$SOC_TEMP" -ge 65000 ]; then
         log_warn "Critical heat detected (Bat: $BAT_TEMP, SoC: $SOC_TEMP). Throttling..."
@@ -65,17 +65,14 @@ while true; do
         write 1900000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
         write 1700000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
     
-    # Warm (38°C - 39.9°C Battery) - Pre-emptive Limit
-    elif [ "$BAT_TEMP" -ge 38000 ]; then
-        write 12 /sys/class/power_supply/battery/charge_control_limit
-        write 0 /sys/class/power_supply/battery/input_suspend
-        write 2000000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
-        write 2200000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
-    
-    # Cool (< 38°C Battery) - Normal Performance
+    # Normal and Warm states - Hand over frequency control to PowerHAL
     else
-        write 8 /sys/class/power_supply/battery/charge_control_limit
+        # Reset charging limits but don't touch CPU frequencies
+        write 0 /sys/class/power_supply/battery/charge_control_limit
         write 0 /sys/class/power_supply/battery/input_suspend
+        
+        # Restore default maximums once to allow PowerHAL full range
+        # policy0 max: 2.0GHz, policy6 max: 2.2GHz
         write 2000000 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
         write 2200000 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
     fi

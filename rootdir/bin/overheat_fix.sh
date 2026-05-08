@@ -15,7 +15,6 @@ log_warn() {
 
 write() {
     if [ -f "$2" ]; then
-        chmod 666 "$2" 2>/dev/null
         echo "$1" > "$2" 2>/dev/null
     else
         log_warn "File not found: $2"

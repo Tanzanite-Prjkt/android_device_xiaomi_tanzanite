@@ -1,0 +1,33 @@
+on init
+    # Create symlink for fuel gauge device
+    symlink /sys/devices/platform/soc/10026000.pwrap/10026000.pwrap:mt6366/mt6358-gauge /dev/gauge
+
+    # Create mount points for battery calibration data
+    mkdir /mnt/vendor/nvcfg 0771 system system
+    mkdir /mnt/vendor/nvdata 0771 system system
+
+on fs
+    # Mount partitions needed by fuelgauged
+    wait /dev/block/by-name/nvcfg
+    mount ext4 /dev/block/by-name/nvcfg /mnt/vendor/nvcfg rw wait
+    
+    wait /dev/block/by-name/nvdata
+    mount ext4 /dev/block/by-name/nvdata /mnt/vendor/nvdata rw wait
+
+on post-fs-data
+    # Start fuel gauge daemons in recovery
+    start fuelgauged
+    start fuelgauged_nvram
+
+service fuelgauged /vendor/bin/fuelgauged
+    user root
+    group root system
+    disabled
+    seclabel u:r:recovery:s0
+
+service fuelgauged_nvram /vendor/bin/fuelgauged_nvram
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0

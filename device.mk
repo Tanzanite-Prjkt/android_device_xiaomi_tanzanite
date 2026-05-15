@@ -190,7 +190,14 @@ PRODUCT_PACKAGES += \
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health-service.example \
-    android.hardware.health-service.example_recovery
+    android.hardware.health-service.example_recovery \
+    fuelgauged \
+    fuelgauged_nvram
+
+# Recovery Battery Fix
+PRODUCT_COPY_FILES += \
+    vendor/xiaomi/tanzanite/proprietary/vendor/bin/fuelgauged:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/bin/fuelgauged \
+    vendor/xiaomi/tanzanite/proprietary/vendor/bin/fuelgauged_nvram:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/bin/fuelgauged_nvram
 
 # Light
 PRODUCT_PACKAGES += \
@@ -347,6 +354,7 @@ PRODUCT_PACKAGES += \
     init.project.rc \
     init.sensor_2_0.rc \
     init.recovery.usb.rc \
+    init.recovery.mt6789.rc \
     fstab.mt6789 \
     fstab.mt6789.vendor_ramdisk \
     ueventd.mt6789.rc

@@ -71,6 +71,8 @@
 
 # Thermal
 /(vendor|system/vendor)/bin/mi_thermald                                                                u:object_r:vendor_mi_thermald_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.thermal-service\.pixel                               u:object_r:hal_thermal_default_exec:s0
+/(vendor|system/vendor)/bin/thermal_symlinks                                                           u:object_r:init-thermal-symlinks-sh_exec:s0
 /sys/devices/virtual/thermal/thermal_message/sconfig                                                   u:object_r:vendor_sysfs_thermalconfig:s0
 
 # Touchfeatures

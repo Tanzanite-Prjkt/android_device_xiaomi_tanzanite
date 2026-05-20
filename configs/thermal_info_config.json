@@ -1,52 +1,106 @@
 {
-  "Sensors": [
-    {
-      "Name": "CPU",
-      "Type": "CPU",
-      "ZoneName": "soc_max",
-      "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
-      "VrThreshold": "85.0",
-      "Multiplier": 0.001
-    },
-    {
-      "Name": "GPU",
-      "Type": "GPU",
-      "ZoneName": "soc_max",
-      "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
-      "VrThreshold": "85.0",
-      "Multiplier": 0.001
-    },
-    {
-      "Name": "battery",
-      "Type": "BATTERY",
-      "HotThreshold": ["NaN", "NaN", "NaN", 50.0, 55.0, 59.0, 60.0],
-      "VrThreshold": "50.0",
-      "Multiplier": 0.001
-    },
-    {
-      "Name": "ap_ntc",
-      "Type": "SKIN",
-      "HotThreshold": ["NaN", "NaN", "NaN", 50.0, 70.0, 80.0, 90.0],
-      "VrThreshold": "50.0",
-      "Multiplier": 0.001
-    },
-    {
-      "Name": "NPU",
-      "Type": "NPU",
-      "ZoneName": "soc_max",
-      "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
-      "VrThreshold": "NaN",
-      "Multiplier": 0.001
-    }
-  ],
-  "CoolingDevices": [
-    {
-      "Name": "thermal-devfreq-0",
-      "Type": "CPU"
-    },
-    {
-      "Name": "mutt-pa1",
-      "Type": "MODEM"
-    }
-  ]
+    "Sensors": [
+        {
+            "Name": "cpu_little1",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_little2",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_little3",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_little4",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_big1",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_big2",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_big3",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "cpu_big4",
+            "Type": "CPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "gpu1",
+            "Type": "GPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "gpu2",
+            "Type": "GPU",
+            "HotThreshold": ["NaN", "NaN", "NaN", 85.0, 90.0, 100.0, 117.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "battery",
+            "Type": "BATTERY",
+            "HotThreshold": ["NAN", "NAN", "NAN", 50.0, 55.0, 59.0, 60.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "ltepa_ntc",
+            "Type": "POWER_AMPLIFIER",
+            "HotThreshold": ["NAN", "NAN", "NAN", 68.0, 90.0, 100.0, 110.0],
+            "VrThreshold": "NAN",
+            "Multiplier": 0.001
+        },
+        {
+            "Name": "ap_ntc",
+            "Type": "SKIN",
+            "HotThreshold": ["NaN", "NaN", "NaN", 50.0, 70.0, 80.0, 90.0],
+            "VrThreshold": 50.0,
+            "Multiplier": 0.001,
+            "Monitor": true
+        }
+    ],
+    "CoolingDevices": [
+        {
+            "Name": "thermal-devfreq-0",
+            "Type": "CPU"
+        },
+        {
+            "Name": "battery",
+            "Type": "BATTERY"
+        }
+    ]
 }

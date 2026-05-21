@@ -738,6 +738,10 @@ on property:sys.boot_completed=1 && property:ro.debuggable="1"
 on zygote-start
     stop statsd
 
+# Reduce Kernel Printk logging and Kill Battery first_usage_date
+on early-init
+    chmod 000 /sys/class/power_supply/battery/first_usage_date
+
 service statsd /apex/com.android.os.statsd/bin/statsd
     class main
     socket statsdw dgram+passcred 0222 statsd statsd

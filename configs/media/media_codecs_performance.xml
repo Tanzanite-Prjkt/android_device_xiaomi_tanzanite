@@ -191,5 +191,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="measured-frame-rate-720x480" range="60-112" />
             <Limit name="measured-frame-rate-1280x720" range="20-44" />
          </MediaCodec>
+    <!-- Include Dolby Audio MediaCodecs -->
+    <Include href="media_codecs_dolby_audio.xml" />
     </Decoders>
 </MediaCodecs>

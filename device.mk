@@ -281,7 +281,7 @@ PRODUCT_PACKAGES += \
     thermal_symlinks
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/thermal/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 # USB
 PRODUCT_PACKAGES += \

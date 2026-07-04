@@ -93,7 +93,8 @@ blob_fixups: blob_fixups_user_type = {
         "vendor/lib64/mt6789/libaalservice.so",
     ): blob_fixup()
     .patchelf_version(patchelf_version)
-    .replace_needed("libsensorndkbridge.so", "android.hardware.sensors@1.0-convert-shared.so"),
+    .replace_needed("libsensorndkbridge.so", "android.hardware.sensors@1.0-convert-shared.so")
+    .replace_needed('libmnl.so', 'libmnl_mtk.so'),
     "vendor/lib64/mt6789/libcam.utils.sensorprovider.so": blob_fixup()
     .add_needed("android.hardware.sensors@1.0-convert-shared.so"),
     "vendor/etc/init/android.hardware.bluetooth@1.1-service-mediatek.rc": blob_fixup().regex_replace(

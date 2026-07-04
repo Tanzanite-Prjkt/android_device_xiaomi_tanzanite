@@ -358,7 +358,7 @@ VENDOR_PLATFORM_LINKS := \
 	$(TARGET_OUT_VENDOR)/lib64/libimageio_plat_pipe.so \
 	$(TARGET_OUT_VENDOR)/lib64/libimageio.so \
 	$(TARGET_OUT_VENDOR)/lib64/liblpcnr.so \
-	$(TARGET_OUT_VENDOR)/lib64/libmnl.so \
+	$(TARGET_OUT_VENDOR)/lib64/libmnl_mtk.so \
 	$(TARGET_OUT_VENDOR)/lib64/libmsnr.so \
 	$(TARGET_OUT_VENDOR)/lib64/libmtkcam_3rdparty.core.so \
 	$(TARGET_OUT_VENDOR)/lib64/libmtkcam_3rdparty.customer.so \

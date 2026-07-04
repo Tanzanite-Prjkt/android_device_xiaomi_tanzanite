@@ -242,10 +242,8 @@ PRODUCT_COPY_FILES += \
 
 # MM
 PRODUCT_PACKAGES += \
-    init.zram.rc
-
-PRODUCT_COPY_FILES += \
-    hardware/google/pixel/mm/fstab.zram.50p-1g:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.zram
+    init.zram.rc \
+    fstab.zram
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -423,7 +421,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/mediatek/wlan/wifi_hal \
     hardware/xiaomi \
     hardware/google/interfaces \
-    hardware/google/pixel
+    hardware/google/pixel/pixelstats \
+    hardware/google/pixel/power-libperfmgr
 
 # Shipping API Level
 PRODUCT_SHIPPING_API_LEVEL := 31

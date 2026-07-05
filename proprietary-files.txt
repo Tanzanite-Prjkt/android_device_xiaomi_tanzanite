@@ -1365,7 +1365,7 @@ vendor/etc/vintf/manifest/gnss@2.1-service.xml
 vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so
 vendor/lib64/hw/android.hardware.gnss@2.1-impl-mediatek.so
 vendor/lib64/hw/gps.default.so
-vendor/lib64/mt6789/libmnl.so:vendor/lib64/mt6789/libmnl_mtk.so;FIX_SONAME
+vendor/lib64/mt6789/libmnl.so:vendor/lib64/mt6789/libmnl_mtk.so;FIX_SONAME;DISABLE_CHECKELF
 vendor/lib64/mt6789/libDR.so
 vendor/lib64/librpc.so
 vendor/lib64/libviagpsrpc.so

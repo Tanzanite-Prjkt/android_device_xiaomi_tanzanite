@@ -1,0 +1,10 @@
+<compatibility-matrix version="4.0" type="framework">
+    <hal format="aidl" optional="true">
+         <name>android.hardware.gnss</name>
+         <version>1</version>
+         <interface>
+             <name>IGnss</name>
+             <instance>default</instance>
+         </interface>
+    </hal>
+</compatibility-matrix>

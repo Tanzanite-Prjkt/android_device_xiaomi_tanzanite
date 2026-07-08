@@ -23,6 +23,13 @@ $(call inherit-product, vendor/mediatek/ims/ims.mk)
 TARGET_SCREEN_HEIGHT := 1080
 TARGET_SCREEN_WIDTH := 2400
 
+# Security patch level
+VENDOR_SECURITY_PATCH := 2026-02-01
+BOOT_SECURITY_PATCH := 2026-02-01
+
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.vendor.boot_security_patch=$(BOOT_SECURITY_PATCH)
+
 # AB OTA Configuration
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := \

@@ -28,3 +28,6 @@ ro.product.marketname=Redmi Note 14
 
 # ZRAM writeback
 ro.zram_backing_device_min_free_mb=1536
+
+# RKP
+remote_provisioning.hostname=remoteprovisioning.googleapis.com

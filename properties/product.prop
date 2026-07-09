@@ -31,3 +31,7 @@ ro.zram_backing_device_min_free_mb=1536
 
 # RKP
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
+
+# Netflix
+ro.netflix.channel=004ee050-1a17-11e9-bb61-6f1da27fb55b
+ro.netflix.signup=1

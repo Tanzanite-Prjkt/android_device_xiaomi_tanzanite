@@ -207,6 +207,10 @@ PRODUCT_COPY_FILES += \
     vendor/xiaomi/tanzanite/proprietary/vendor/bin/fuelgauged:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/bin/fuelgauged \
     vendor/xiaomi/tanzanite/proprietary/vendor/bin/fuelgauged_nvram:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/bin/fuelgauged_nvram
 
+# HotwordEnrollement
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
+
 # Keymint
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore_V3.xml

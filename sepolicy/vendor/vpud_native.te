@@ -1,0 +1,2 @@
+allow vpud_native dmabuf_system_secure_heap_device:chr_file { open read ioctl getattr };
+allow vpud_native dmabuf_system_heap_device:chr_file { open read ioctl getattr };

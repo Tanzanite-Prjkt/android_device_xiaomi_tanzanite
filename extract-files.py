@@ -59,7 +59,8 @@ lib_fixups: lib_fixups_user_type = {
 blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/hw/audio.primary.mediatek.so': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so')
-        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
+        .replace_needed('libalsautils.so','libalsautils-v32.so'),
     "vendor/bin/hw/android.hardware.security.keymint@1.0-service.mitee": blob_fixup()
     .patchelf_version(patchelf_version)
     .replace_needed(

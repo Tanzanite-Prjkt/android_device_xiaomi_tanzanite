@@ -146,7 +146,7 @@ TARGET_PRODUCT_PROP += $(DEVICE_PATH)/properties/product.prop
 # Android Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := 0
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS := --flags 1
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS := --set_hashtree_disabled_flag
 BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 
 # Build vbmeta_system
